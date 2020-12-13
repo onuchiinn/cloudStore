@@ -6,7 +6,7 @@ v-layout
     router-link(to="/55")
       v-btn(@click="LOGOUT") LOGOUT
   v-main
-    v-container(fluid)
+    v-container(fluid fill-height)
       router-view
   v-footer(app)
     v-card.text-center(flat, tile, width="100%")

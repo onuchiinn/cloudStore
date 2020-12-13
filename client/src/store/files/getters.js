@@ -5,4 +5,7 @@ export default {
   CURRENT_DIR(state) {
     return state.currentDir;
   },
+  DIR_STACK(state) {
+    return state.dirStack;
+  },
 }

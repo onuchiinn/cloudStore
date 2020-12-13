@@ -7,7 +7,6 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 export default new VueRouter({
-  //на продакшене убрать
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
