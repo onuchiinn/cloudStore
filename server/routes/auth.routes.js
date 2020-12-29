@@ -35,7 +35,8 @@ router.post('/registration', [
       const hashPassword = await bcrypt.hash(password, 7)
       const user = new User({ email, password: hashPassword })
       await user.save()
-      await fileService.createDir(new File({user: user.id, name: ""}))
+      console.log(user)
+      await fileService.createDir(new File({user: user._id, name: ""}))
       return res.status(200).json({ message: "User was created" })
 
     } catch (e) {

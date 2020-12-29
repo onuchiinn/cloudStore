@@ -27,7 +27,7 @@
                             v-spacer
                             v-btn(text @click="createDirHandler") Создать
             v-spacer
-            v-col(cols="4").mx-4
+            v-col(cols="3").mx-2
                 v-file-input(label="Загрузить файлы"
                     hide-details
                     dense
@@ -38,13 +38,22 @@
                     multiple
                     prepend-icon="attach_file"
                     @change="fileUploadHandler($event)")
+            v-col(cols="4").mx-2
+                v-select(:items=`[{value: 'name', dispName:'По имени'},
+                              {value: 'type', dispName:'По типу'},
+                              {value: 'date', dispName:'По дате'}]`,
+                item-text="dispName",
+                item-value="value",
+                v-model="sort",
+                @change="clickSortHandler")
 
         c-file-list
-        c-file(v-for="(item, index) in FILES", :key="index", :file="item")
+        transition-group(appear name="fade", mode="out-in")
+            c-file(v-for="(item, index) in FILES", :key="index+'file'", :file="item")
     v-card(v-else
-        outlined
-        rounded
-        min-height="100%"
+    outlined
+    rounded
+    min-height="100%"
         min-width="100%"
         @dragenter.stop.prevent="dragEnterHandler",
         @dragleave.stop.prevent="dragLeaveHandler",
@@ -64,7 +73,8 @@
             return {
                 dialog: false,
                 folderName: "",
-                dragEnter: false
+                dragEnter: false,
+                sort: "type"
             };
         },
         components: {
@@ -87,8 +97,11 @@
                 const dirId = this.DIR_STACK.pop()
                 this.CHANGE_CURRENT_DIR(dirId)
             },
+            clickSortHandler() {
+                this.GET_FILES({dir:this.CURRENT_DIR, sort:this.sort});
+            },
             fileUploadHandler(files) {
-                files.forEach(file=>this.UPLOAD_FILE({file, dirId: this.CURRENT_DIR}))
+                files.forEach(file => this.UPLOAD_FILE({file, dirId: this.CURRENT_DIR}))
             },
             dragEnterHandler() {
                 this.dragEnter = true
@@ -99,7 +112,7 @@
             },
             dropHandler(event) {
                 let files = [...event.dataTransfer.files]
-                files.forEach(file=>this.UPLOAD_FILE({file, dirId: this.CURRENT_DIR}))
+                files.forEach(file => this.UPLOAD_FILE({file, dirId: this.CURRENT_DIR}))
                 this.dragEnter = false
             }
         },
