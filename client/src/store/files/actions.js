@@ -2,19 +2,19 @@ import axios from "axios"
 
 export default {
 
-    async GET_FILES({commit}, dirId) {
-        console.log(dirId)
+    async GET_FILES({commit}, body) {
         try {
+            commit("SHOW_LOADER")
             let url = `http://localhost:5000/api/files`
-            if (dirId) {
-                url = `http://localhost:5000/api/files?parent=${dirId}`
+            if (body.dir) {
+                url = `http://localhost:5000/api/files?parent=${body.dir}`
             }
-            // if (sort) {
-            //     url = `http://localhost:5000/api/files?sort=${sort}`
-            // }
-            // if (dirId && sort) {
-            //     url = `http://localhost:5000/api/files?parent=${dirId}&sort=${sort}`
-            // }
+            if (body.sort) {
+                url = `http://localhost:5000/api/files?sort=${body.sort}`
+            }
+            if (body.dir && body.sort) {
+                url = `http://localhost:5000/api/files?parent=${body.dir}&sort=${body.sort}`
+            }
             await axios.get(url, {
                 headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
             })
@@ -23,6 +23,9 @@ export default {
                 })
         } catch (e) {
             console.log(e.response.data.message)
+        }
+        finally {
+            commit("SHOW_LOADER")
         }
     },
 

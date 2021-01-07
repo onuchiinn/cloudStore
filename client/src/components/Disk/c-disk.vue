@@ -42,12 +42,14 @@
                 v-select(:items=`[{value: 'name', dispName:'По имени'},
                               {value: 'type', dispName:'По типу'},
                               {value: 'date', dispName:'По дате'}]`,
-                item-text="dispName",
-                item-value="value",
-                v-model="sort",
-                @change="clickSortHandler")
+                    item-text="dispName",
+                    item-value="value",
+                    v-model="sort",
+                    label="Сортировка",
+                    @change="clickSortHandler")
 
         c-file-list
+        .red--text.text-center(v-if="FILES.length === 0" cols="12") Файлы не найдены.
         transition-group(appear name="fade", mode="out-in")
             c-file(v-for="(item, index) in FILES", :key="index+'file'", :file="item")
     v-card(v-else
@@ -79,7 +81,7 @@
         },
         components: {
             cFileList,
-            cFile,
+            cFile
         },
         methods: {
             ...mapActions({
@@ -98,7 +100,7 @@
                 this.CHANGE_CURRENT_DIR(dirId)
             },
             clickSortHandler() {
-                this.GET_FILES({dir:this.CURRENT_DIR, sort:this.sort});
+                this.GET_FILES({dir: this.CURRENT_DIR, sort: this.sort});
             },
             fileUploadHandler(files) {
                 files.forEach(file => this.UPLOAD_FILE({file, dirId: this.CURRENT_DIR}))
@@ -120,15 +122,16 @@
             ...mapGetters({
                 FILES: "files/FILES",
                 CURRENT_DIR: "files/CURRENT_DIR",
-                DIR_STACK: "files/DIR_STACK"
+                DIR_STACK: "files/DIR_STACK",
+                INFORM_MESSAGE: "auth/INFORM_MESSAGE"
             }),
         },
         created() {
-            this.GET_FILES(this.CURRENT_DIR);
+            this.GET_FILES({dir: this.CURRENT_DIR, sort: this.sort});
         },
         watch: {
             CURRENT_DIR() {
-                this.GET_FILES(this.CURRENT_DIR);
+                this.GET_FILES({dir: this.CURRENT_DIR, sort: this.sort});
             },
         },
     };

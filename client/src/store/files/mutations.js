@@ -14,4 +14,7 @@ export default {
   DELETE_FILES: (state, id) => {
     state.files = [...state.files.filter(file => file._id != id)]
   },
+  SHOW_LOADER: (state) => {
+    state.loader = !state.loader
+  },
 }

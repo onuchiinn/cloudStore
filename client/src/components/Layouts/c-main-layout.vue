@@ -3,7 +3,7 @@ v-layout
   v-app-bar(app)
     v-icon(large, color="primary") cloud
     v-spacer
-    router-link(to="/55")
+    router-link(to="/login")
       v-btn(@click="LOGOUT") LOGOUT
   v-main
     v-container(fluid fill-height)

@@ -1,3 +1,3 @@
- completed15
-на 16 на директории пути в fileController сделал по своему
-19
+Упор больше на функционал, чем на внешнее оформление.
+client - yarn serve
+server - yarn run start

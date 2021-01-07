@@ -8,4 +8,8 @@ export default {
   DIR_STACK(state) {
     return state.dirStack;
   },
+  LOADER(state) {
+    return state.loader;
+  },
+
 }

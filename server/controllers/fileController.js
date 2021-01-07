@@ -32,26 +32,26 @@ class FileController {
 
     async getFiles(req, res) {
         try {
-            // const {sort} = req.query
-            console.log("22")
+            const {sort} = req.query
             console.log(req.query)
-            let files = await File.find({user: req.user.id, parent: req.query.parent})
-            // switch (sort) {
-            //     case "name":
-            //         files = await File.find({user: req.user.id, parent: req.query.parent}).sort({name:1})
-            //         break
-            //     case "type":
-            //         files = await File.find({user: req.user.id, parent: req.query.parent}).sort({type:1})
-            //         break
-            //     case "date":
-            //         files = await File.find({user: req.user.id, parent: req.query.parent}).sort({date:1})
-            //         break
-            //     default:
-            //         files = await File.find({user: req.user.id, parent: req.query.parent})
-            //         break;
-            // }
+            // let files = await File.find({user: req.user.id, parent: req.query.parent})
+            let files
+            switch (sort) {
+                case "name":
+                    files = await File.find({user: req.user.id, parent: req.query.parent}).sort({name:1})
+                    break
+                case "type":
+                    files = await File.find({user: req.user.id, parent: req.query.parent}).sort({type:1})
+                    break
+                case "date":
+                    files = await File.find({user: req.user.id, parent: req.query.parent}).sort({date:1})
+                    break
+                default:
+                    files = await File.find({user: req.user.id, parent: req.query.parent})
+                    break;
+            }
             console.log(files)
-            return res.json(files)
+            return res.status(200).json(files)
         } catch (e) {
             console.log(e)
             return res.status(500).json({message: "Can't get files"})
