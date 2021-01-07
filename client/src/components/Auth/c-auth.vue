@@ -20,10 +20,11 @@ v-row(align="center", justify="center")
             v-model="password"
           )
           v-btn(type="submit") Войти
+      .red--text.text-center {{INFORM_MESSAGE}}
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "c-auth",
   data: () => ({
@@ -42,7 +43,11 @@ export default {
       this.LOGIN(body);
     },
   },
-  computed: {},
+  computed: {
+      ...mapGetters({
+          INFORM_MESSAGE: "auth/INFORM_MESSAGE"
+      })
+  },
   created() {},
 };
 </script>

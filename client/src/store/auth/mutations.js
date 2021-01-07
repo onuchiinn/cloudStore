@@ -5,4 +5,7 @@ export default {
   PUT_CURRENT_USER: (state, item) => {
     state.currentUser = item
   },
+  INFORM_MESSAGE: (state, item) => {
+    state.message = item
+  },
 }

@@ -25,6 +25,7 @@ export default {
           localStorage.setItem('token', response.data.token)
         })
     } catch (e) {
+      commit("INFORM_MESSAGE", e.response.data.message)
       console.log(e.response.data.message)
     }
   },
@@ -42,6 +43,7 @@ export default {
         })
     } catch (e) {
       console.log(e.response.data.message)
+      commit("INFORM_MESSAGE", e.response.data.message)
       localStorage.removeItem('token')
     }
   },

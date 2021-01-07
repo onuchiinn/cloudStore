@@ -23,11 +23,17 @@ class FileService {
     }))
   }
 
-
+  deleteFile(file) {
+    if (file.type === "dir") {
+      fs.rmdirSync(path.join(__dirname, `../files/${file.user}/${file.path}`))
+    } else {
+      fs.unlinkSync(path.join(__dirname, `../files/${file.path}/${file.name}`))
+    }
+  }
 
 }
 
 
 
 
-module.exports = new FileService()
+  module.exports = new FileService()

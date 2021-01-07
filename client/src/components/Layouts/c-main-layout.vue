@@ -3,10 +3,10 @@ v-layout
   v-app-bar(app)
     v-icon(large, color="primary") cloud
     v-spacer
-    router-link(to="/55")
+    router-link(to="/login")
       v-btn(@click="LOGOUT") LOGOUT
   v-main
-    v-container(fluid)
+    v-container(fluid fill-height)
       router-view
   v-footer(app)
     v-card.text-center(flat, tile, width="100%")

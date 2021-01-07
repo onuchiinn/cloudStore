@@ -1,7 +1,9 @@
 server/node_modules
+server/files
 client/node_modules
 client/dist
 client/.vscode
+readme.txt
 
 
 

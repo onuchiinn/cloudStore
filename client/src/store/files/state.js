@@ -1,4 +1,6 @@
 export default {
   files: [],
-  currentDir: null
+  currentDir: null,
+  dirStack: [],
+  loader: false
 }
